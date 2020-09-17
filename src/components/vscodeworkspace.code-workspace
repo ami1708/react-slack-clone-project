@@ -1,0 +1,21 @@
+{
+	"folders": [
+		{
+			"path": "..\\..\\..\\..\\Nodejs\\codial"
+		},
+		{
+			"path": "..\\..\\..\\..\\RESUME"
+		},
+		{
+			"path": "..\\..\\.."
+		}
+	],
+	"settings": {
+		"cSpell.words": [
+			"form",
+			"signin",
+			"signin form"
+		],
+		"git.ignoreLimitWarning": true
+	}
+}
