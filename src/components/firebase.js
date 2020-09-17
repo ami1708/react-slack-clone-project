@@ -16,7 +16,11 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 export const auth = firebase.auth();
+//a
 export const signInWithGoogle = () => {
+  //initialize google provider
   const googleProvider = new firebase.auth.GoogleAuthProvider();
+  //ask user to select gmail acc in a new pop window
   auth.signInWithPopup(googleProvider);
 };
+//store the data of user in firestore which is online db  which stores data in json format
