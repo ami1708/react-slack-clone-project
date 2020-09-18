@@ -17,18 +17,22 @@ firebase.initializeApp(firebaseConfig);
 
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
-//a
+
+//initialize google provider
+const googleProvider = new firebase.auth.GoogleAuthProvider();
 export const signInWithGoogle = () => {
-  //initialize google provider
-  const googleProvider = new firebase.auth.GoogleAuthProvider();
   //ask user to select gmail acc in a new pop window
   auth.signInWithPopup(googleProvider);
 };
 
-// // Firestore stuff
+export const signOut = () => {
+  auth.signOut();
+};
+
+// Firestore stuff
 // export const firestore = firebase.firestore();
-// window.firestore = firestore;
-//store the data of user in firestore which is online db  which stores data in json format
+window.firestore = firestore;
+// store the data of user in firestore which is online db  which stores data in json format
 
 export const createOrGetUserProfileDocument = async (user) => {
   if (!user) return;
@@ -40,29 +44,31 @@ export const createOrGetUserProfileDocument = async (user) => {
   // if no user exists in DB @ path 'userRef' then go and make one
   if (!snapshot.exists) {
     const { displayName, email, photoURL } = user;
+    const createdAt = new Date();
 
     try {
-      const user = {
+      await userRef.set({
         display_name: displayName,
         email,
-        photo_url: photoURL,
-        created_at: new Date(),
-      };
-      await userRef.set(user);
+        photo_url: photoURL
+          ? photoURL
+          : 'https://ca.slack-edge.com/T0188513NTW-U01867WD8GK-ga631e27835b-72',
+        created_at: createdAt,
+      });
     } catch (error) {
-      console.log('Error', error);
+      console.error('Error creating user', error.message);
     }
   }
   return getUserDocument(user.uid);
 };
-//anything inside the firestore is basically a user document
-async function getUserDocument(uid) {
+
+export const getUserDocument = async (uid) => {
   if (!uid) return null;
 
   try {
-    const userDocument = await firestore.collection('user');
+    const userDocument = await firestore.collection('users').doc(uid);
     return userDocument;
   } catch (error) {
-    console.log('Error in getUserDocument', error.message);
+    console.error('Error fetching user', error.message);
   }
-}
+};

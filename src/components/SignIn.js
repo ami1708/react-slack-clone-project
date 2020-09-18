@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import { signInWithGoogle } from './firebase';
+import { signInWithGoogle, signOut } from './firebase';
 //getting the functionality to the buttons from the firebase
 // import {signInwithGoogle} from '../firebase';
 
@@ -22,6 +22,9 @@ class SignIn extends Component {
           <img src="https://cdn2.iconfinder.com/data/icons/social-icons-33/128/Google-256.png" alt = "pic" />
           Sign up with Google
         </button>
+
+        <br></br>
+        <button onClick = {signOut}>SignOut</button>
       </div>
     );
   }
