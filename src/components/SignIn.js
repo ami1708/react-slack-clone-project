@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import { signInWithGoogle, signOut } from './firebase';
+import { signInWithGoogle } from './firebase';
 //getting the functionality to the buttons from the firebase
 // import {signInwithGoogle} from '../firebase';
 
@@ -23,8 +23,7 @@ class SignIn extends Component {
           Sign up with Google
         </button>
 
-        <br></br>
-        <button onClick = {signOut}>SignOut</button>
+        
       </div>
     );
   }
